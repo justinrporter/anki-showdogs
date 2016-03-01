@@ -5,6 +5,8 @@ from aqt.utils import showInfo
 from aqt.qt import *
 from anki.hooks import wrap
 
+from aqt.utils import showInfo
+
 import os
 import random
 
@@ -12,12 +14,23 @@ mw.showdogs = {}
 mw.showdogs['card_count'] = 0
 mw.showdogs['interval'] = 10
 
-def showDog():
-    mw.showdogs['card_count'] = mw.showdogs['card_count'] + 1
-    if mw.showdogs['card_count'] % mw.showdogs['interval'] != 0:
-        return
+class DogDialog(QDialog):
 
-    dialog = QDialog(mw)
+    def keyPressEvent(self, event):
+
+        # why does it have to be hex? nobody knows.
+        # 0x20 == spacebar
+        if event.key() == 0x20:
+            self.close()
+
+
+def showDog():
+    # mw.showdogs['card_count'] = mw.showdogs['card_count'] + 1
+    # if mw.showdogs['card_count'] % mw.showdogs['interval'] != 0:
+    #     return
+
+    dialog = DogDialog(mw)
+
     layout = QVBoxLayout(dialog)
     dialog.setLayout(layout)
 
