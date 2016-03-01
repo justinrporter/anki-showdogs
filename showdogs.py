@@ -25,9 +25,9 @@ class DogDialog(QDialog):
 
 
 def showDog():
-    # mw.showdogs['card_count'] = mw.showdogs['card_count'] + 1
-    # if mw.showdogs['card_count'] % mw.showdogs['interval'] != 0:
-    #     return
+    mw.showdogs['card_count'] = mw.showdogs['card_count'] + 1
+    if mw.showdogs['card_count'] % mw.showdogs['interval'] != 0:
+        return
 
     dialog = DogDialog(mw)
 
