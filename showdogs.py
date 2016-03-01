@@ -1,3 +1,5 @@
+#pylint: disable-all
+
 from aqt import mw
 from aqt.utils import showInfo
 from aqt.qt import *
@@ -8,7 +10,7 @@ import random
 
 mw.showdogs = {}
 mw.showdogs['card_count'] = 0
-mw.showdogs['interval'] = 9
+mw.showdogs['interval'] = 10
 
 def showDog():
     mw.showdogs['card_count'] = mw.showdogs['card_count'] + 1
@@ -28,8 +30,10 @@ def showDog():
     image.loadFromData(data)
 
     label = QLabel()
-    label.setPixmap(QPixmap(image))
-
+    myPixmap = QPixmap(os.path.join(dogs_dir, image_path))
+    myScaledPixmap = myPixmap.scaled(label.size(), Qt.KeepAspectRatio, Qt.SmoothTransformation)
+    label.setPixmap(myScaledPixmap)
+    label.show()
     layout.addWidget(label)
 
     dialog.exec_()
